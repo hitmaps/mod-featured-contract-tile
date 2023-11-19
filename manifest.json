@@ -2,7 +2,7 @@
 	"$schema": "https://raw.githubusercontent.com/atampy25/simple-mod-framework/main/Mod%20Manager/src/lib/manifest-schema.json",
 	"version": "1.0.0",
 	"id": "HITMAPS.FeaturedContractsMissionAccomplishedTile",
-	"name": "Mission Accomplished - Featued Contracts Tile",
+	"name": "Mission Accomplished - Featured Contracts Tile",
 	"description": "Adds a tile to the featured contracts menu when viewing the Mission Accomplished screen (after completing a featured contract)",
 	"authors": ["MrMike"],
 	"contentFolders": ["content"],
