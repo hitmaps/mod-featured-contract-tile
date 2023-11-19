@@ -1,0 +1,145 @@
+{
+	"$switch $.Content.Name": [
+		{
+			"case": "sniper",
+			"return": {
+				"id": "element",
+				"view": "menu3.basic.MenuTileLarge",
+				"pressable": true,
+				"selectable": true,
+				"data": {
+					"header": "$loc UI_MENU_PAGE_HUB_GAMEMODES",
+					"title": "$loc UI_SNIPER_CHALLENGE_TITLE",
+					"image": "$res images/livetile/tile_gamemode_sniper.jpg",
+					"icon": "arrowright"
+				},
+				"actions": {
+					"select": {
+						"replace-children": {
+							"target": "headline_container",
+							"children": [
+								{
+									"view": "menu3.basic.HeadlineElement",
+									"selectable": false,
+									"pressable": false,
+									"data": {
+										"title": "$loc UI_SNIPER_CHALLENGE_TITLE",
+										"header": "$loc UI_MENU_PAGE_HUB_GAMEMODES",
+										"icon": "arrowright"
+									}
+								}
+							]
+						}
+					},
+					"deselect": {
+						"replace-children": {
+							"target": "headline_container",
+							"children": []
+						}
+					},
+					"accept": {
+						"$include": {
+							"$path": "menusystem/pages/playnext/content/goto_menupage_sniper.json"
+						}
+					}
+				}
+			}
+		},
+		{
+			"case": "featured",
+			"return": {
+				"id": "element",
+				"view": "menu3.basic.MenuTileLarge",
+				"pressable": true,
+				"selectable": true,
+				"data": {
+					"header": "$loc UI_MENU_PAGE_HUB_GAMEMODES",
+					"title": "$loc UI_MENU_PAGE_HITS_ELEMENT_CATEGORY_FEATURED",
+					"image": "$res images/backgrounds/gamemode_contracts.jpg",
+					"icon": "featured"
+				},
+				"actions": {
+					"select": {
+						"replace-children": {
+							"target": "headline_container",
+							"children": [
+								{
+									"view": "menu3.basic.HeadlineElement",
+									"selectable": false,
+									"pressable": false,
+									"data": {
+										"title": "$loc UI_MENU_PAGE_HITS_ELEMENT_CATEGORY_FEATURED",
+										"header": "$loc UI_MENU_PAGE_HUB_GAMEMODES",
+										"icon": "featured"
+									}
+								}
+							]
+						}
+					},
+					"deselect": {
+						"replace-children": {
+							"target": "headline_container",
+							"children": []
+						}
+					},
+					"accept": {
+						"set-persistent-context": {
+							"target": "hub",
+							"actions": [
+								{
+									"call": {
+										"onmenuframe": true,
+										"method": "showBackground",
+										"args": false
+									}
+								},
+								{
+									"set-selected": {
+										"target": "category_gamemodes"
+									}
+								},
+								{
+									"set-selected": {
+										"target": "gamemodes_category_contracts"
+									}
+								},
+								{
+									"trigger-input": {
+										"action": "accept"
+									}
+								},
+								{
+									"set-menu-context": {
+										"value": {
+											"onpageopened": [
+												{
+													"set-selected": {
+														"target": "Featured_tile"
+													},
+													"trigger-input": {
+														"action": "accept"
+													}
+												}
+											]
+										}
+									}
+								},
+								{
+									"call": {
+										"onmenuframe": true,
+										"method": "showBackground",
+										"args": true
+									}
+								}
+							]
+						},
+						"exit-to-main-menu": {}
+					}
+				}
+			}
+		},
+		{
+			"default": null
+		}
+	]
+}
