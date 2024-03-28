@@ -1,0 +1,140 @@
+{
+	"file": "00E73744A630957C",
+	"type": "JSON",
+	"patch": [
+		{
+			"op": "add",
+			"path": "/$datacontext/datavalues/FilteredStatus",
+			"value": "$gamepersistentdata hitmaps_fc_filtered_status"
+		},
+		{
+			"op": "add",
+			"path": "/$datacontext/datavalues/FilterName",
+			"value": {
+				"$switch $gamepersistentdata hitmaps_fc_filtered_status": [
+					{
+						"case": "completed",
+						"return": "$loc UI_MENU_PAGE_CHALLENGES_COMPLETED"
+					},
+					{
+						"case": "not_completed",
+						"return": "$loc UI_MENU_PAGE_CHALLENGES_NOT_COMPLETED"
+					},
+					{
+						"default": "$loc UI_MENU_PAGE_NO_FILTER"
+					}
+				]
+			}
+		},
+		{
+			"op": "add",
+			"path": "/$datacontext/do/actions/$mergeobjects/-",
+			"value": {
+				"$if $eq($.Category,Featured)": {
+					"$then": {
+						"actiony": {
+							"prompt_label": "$formatstring {$loc UI_MENU_PAGE_CHALLENGES_CHANGE_FILTER} ({$.FilterName})",
+							"show-modal": {
+								"config": {
+									"view": "menu3.modal.ModalDialogGeneric",
+									"data": {
+										"title": "$loc UI_MENU_PAGE_CHALLENGES_CHANGE_FILTER",
+										"description": "$loc UI_HITMAPS_MENU_PAGE_FC_CHANGE_FILTER_DESCRIPTION"
+									},
+									"buttons": [
+										{
+											"$if $isnullorempty $.FilteredStatus": {
+												"$then": {
+													"label": "$loc UI_MENU_PAGE_NO_FILTER",
+													"icon": "check",
+													"type": "cancel"
+												},
+												"$else": {
+													"label": "$loc UI_MENU_PAGE_NO_FILTER",
+													"icon": "blank"
+												}
+											}
+										},
+										{
+											"$if $eq($.FilteredStatus,completed)": {
+												"$then": {
+													"label": "$loc UI_MENU_PAGE_CHALLENGES_COMPLETED",
+													"icon": "check",
+													"type": "cancel"
+												},
+												"$else": {
+													"label": "$loc UI_MENU_PAGE_CHALLENGES_COMPLETED",
+													"icon": "blank"
+												}
+											}
+										},
+										{
+											"$if $eq($.FilteredStatus,not_completed)": {
+												"$then": {
+													"label": "$loc UI_MENU_PAGE_CHALLENGES_NOT_COMPLETED",
+													"icon": "check",
+													"type": "cancel"
+												},
+												"$else": {
+													"label": "$loc UI_MENU_PAGE_CHALLENGES_NOT_COMPLETED",
+													"icon": "blank"
+												}
+											}
+										}
+									],
+									"button_initially_selected": {
+										"$switch $.FilteredStatus": [
+											{
+												"case": "completed",
+												"return": 1
+											},
+											{
+												"case": "not_completed",
+												"return": 2
+											},
+											{
+												"default": 0
+											}
+										]
+									}
+								},
+								"onbutton": [
+									{
+										"$if $not $isnullorempty $.FilteredStatus": {
+											"$then": {
+												"set-game-persistent-data": {
+													"key": "hitmaps_fc_filtered_status",
+													"value": ""
+												}
+											}
+										}
+									},
+									{
+										"$if $not $eq($.FilteredStatus,completed)": {
+											"$then": {
+												"set-game-persistent-data": {
+													"key": "hitmaps_fc_filtered_status",
+													"value": "completed"
+												}
+											}
+										}
+									},
+									{
+										"$if $not $eq($.FilteredStatus,not_completed)": {
+											"$then": {
+												"set-game-persistent-data": {
+													"key": "hitmaps_fc_filtered_status",
+													"value": "not_completed"
+												}
+											}
+										}
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		}
+	]
+}
