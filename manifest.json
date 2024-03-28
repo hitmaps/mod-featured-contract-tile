@@ -1,12 +1,12 @@
 {
 	"$schema": "https://raw.githubusercontent.com/atampy25/simple-mod-framework/main/Mod%20Manager/src/lib/manifest-schema.json",
-	"version": "1.0.1",
+	"version": "1.1.0",
 	"id": "HITMAPS.FeaturedContractsMissionAccomplishedTile",
 	"name": "Featured Contracts Improvements",
 	"description": "Adds the ability to filter featured contracts and adds a tile to the featured contracts menu when viewing the Mission Accomplished screen",
 	"authors": ["MrMike"],
 	"contentFolders": ["content"],
-	"frameworkVersion": "2.33.6",
+	"frameworkVersion": "2.33.9",
 	"localisation": {
 		"english": {
 			"UI_HITMAPS_MENU_PAGE_FC_CHANGE_FILTER_DESCRIPTION": "Which Featured Contracts do you want to see?"
