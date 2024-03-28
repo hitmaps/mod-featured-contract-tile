@@ -7,5 +7,10 @@
 	"authors": ["MrMike"],
 	"contentFolders": ["content"],
 	"frameworkVersion": "2.33.6",
+	"localisation": {
+		"english": {
+			"UI_HITMAPS_MENU_PAGE_FC_CHANGE_FILTER_DESCRIPTION": "Which Featured Contracts do you want to see?"
+		}
+	},
 	"updateCheck": "https://github.com/hitmaps/mod-featured-contract-tile/releases/latest/download/updates.json"
 }

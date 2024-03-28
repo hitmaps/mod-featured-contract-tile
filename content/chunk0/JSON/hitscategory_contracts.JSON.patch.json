@@ -1,0 +1,38 @@
+{
+	"file": "00B8052977CF6C75",
+	"type": "JSON",
+	"patch": [
+		{
+			"op": "replace",
+			"path": "/$each $.Data.Hits/$datacontext/do/$if $eq($arraysize $.UserCentricContract.Contract.Metadata.Enginemodes,2)/$else",
+			"value": {
+				"$if": {
+					"$condition": {
+						"$or": [
+							"$not $eq($.UserCentricContract.Contract.Metadata.Type,featured)",
+							"$isnullorempty $.@parent.@parent.FilteredStatus",
+							{
+								"$and": [
+									"$not $isnullorempty $.UserCentricContract.Data.LastPlayedAt",
+									"$not $not $.UserCentricContract.Data.Completed",
+									"$eq($.@parent.@parent.FilteredStatus,completed)"
+								]
+							},
+							{
+								"$and": [
+									"$not $.UserCentricContract.Data.Completed",
+									"$eq($.@parent.@parent.FilteredStatus,not_completed)"
+								]
+							}
+						]
+					},
+					"$then": {
+						"$include": {
+							"$path": "menusystem/elements/contract/hit.json"
+						}
+					}
+				}
+			}
+		}
+	]
+}
